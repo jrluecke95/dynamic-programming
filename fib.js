@@ -1,19 +1,19 @@
 function fib(num) {
-  if (num <= 1) return 1;
+  if (num <= 2) return 1;
 
   return fib(num - 1) + fib(num - 2);
 }
 // memoized
 function memoFib(num, memo={}) {
-  if (num <= 1) {
+  if (num in memo) {
+    return memo[num];
+  }
+  if (num <= 2) {
     return 1;
   }
-  if (memo[num]) {
-    return memo[num];
-  } else {
-    return memoFib(num-1, memo) + memoFib(num-2, memo)
-  }
+  memo[num] = memoFib(num - 1, memo) + memoFib(num - 2, memo);
+  return memo[num]
 }
 
 console.log(fib(5))
-console.log(memoFib(5))
+console.log(memoFib(50))
